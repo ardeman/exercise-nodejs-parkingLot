@@ -1,0 +1,19 @@
+{
+  "name": "parking-lot",
+  "version": "2.0.0",
+  "description": "Simple parking management",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://ardeman@github.com/ardeman/exercise-parking-lot.git"
+  },
+  "author": "Ardeman (ardeman.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ardeman/exercise-parking-lot/issues"
+  },
+  "homepage": "https://github.com/ardeman/exercise-parking-lot#readme"
+}
