@@ -4,7 +4,7 @@
  */
 class ParkingLot {
     constructor() {
-        this.MAX_PARKING_SLOTS = 0; // maximum parking slots allowed
+        this.capacity = 0; // maximum parking slots allowed
         this.parkingSlots = new Array(); // array for parking slots
     }
 
@@ -15,17 +15,17 @@ class ParkingLot {
      * It throws an error if zero or negative input is provided
      */
     createParkingLot(input) {
-        this.MAX_PARKING_SLOTS = parseInt(input.split(" ")[1]) || 0;
-        if (this.MAX_PARKING_SLOTS <= 0) {
+        this.capacity = parseInt(input.split(" ")[1]) || 0;
+        if (this.capacity <= 0) {
             // minimum: 1 slot
             throw new Error(
                 "Minimum one slot is required to create parking slot"
             );
         }
-        for (let i = 0; i < this.MAX_PARKING_SLOTS; i++) {
+        for (let i = 0; i < this.capacity; i++) {
             this.parkingSlots.push(null);
         }
-        return this.MAX_PARKING_SLOTS;
+        return this.capacity;
     }
 
     /**
@@ -36,7 +36,7 @@ class ParkingLot {
      */
     parkCar(input) {
         const len = this.parkingSlots.length;
-        if (this.MAX_PARKING_SLOTS > 0) {
+        if (this.capacity > 0) {
             let carNumber;
             if (this.findNearestAvailableSlot(this.parkingSlots) == true) {
                 for (let i = 0; i < len; i++) {
@@ -62,14 +62,14 @@ class ParkingLot {
      * It throws an error if car is not found.
      */
     leaveCar(input) {
-        if (this.MAX_PARKING_SLOTS > 0) {
+        if (this.capacity > 0) {
             const carNumber = input.split(" ")[1];
-            const parkingDuration = input.split(" ")[2];
-            if (carNumber && parkingDuration) {
+            const hours = input.split(" ")[2];
+            if (carNumber && hours) {
                 const isCarParked = this.parkingSlots.includes(carNumber);
-                let charge = this.getCharge(parkingDuration);
+                let charge = this.getCharge(hours);
                 if (isCarParked) {
-                    for (let i = 0; i < this.MAX_PARKING_SLOTS; i++) {
+                    for (let i = 0; i < this.capacity; i++) {
                         if (this.parkingSlots[i] === carNumber) {
                             this.parkingSlots[i] = null;
                             return {
@@ -99,7 +99,7 @@ class ParkingLot {
      */
     getParkingStatus() {
         let arr = new Array();
-        if (this.MAX_PARKING_SLOTS > 0) {
+        if (this.capacity > 0) {
             arr.push("Slot No.    Registration No.");
 
             for (let i = 0; i < this.parkingSlots.length; i++) {

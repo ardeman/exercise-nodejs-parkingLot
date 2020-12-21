@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha tests/specs.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/ardeman/exercise-parking-lot/issues"
   },
-  "homepage": "https://github.com/ardeman/exercise-parking-lot#readme"
+  "homepage": "https://github.com/ardeman/exercise-parking-lot#readme",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1"
+  }
 }
