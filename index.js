@@ -83,8 +83,12 @@ function processUserCommands(input) {
             break;
         case "leave":
             try {
-                parkingSlotNumber = parkingLot.leaveCar(input);
-                console.log("Slot number " + parkingSlotNumber + " is free.");
+                parkingResult = parkingLot.leaveCar(input);
+                console.log(
+                    `Registration number ${parkingResult.carNumber}`,
+                    `with Slot Number ${parkingResult.slot} is free`,
+                    `with Charge ${parkingResult.charge}`
+                );
             } catch (err) {
                 console.log(err.message);
             }

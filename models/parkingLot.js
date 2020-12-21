@@ -15,7 +15,7 @@ class ParkingLot {
      * It throws an error if zero or negative input is provided
      */
     createParkingLot(input) {
-        this.MAX_PARKING_SLOTS = parseInt(input.split(" ")[1]);
+        this.MAX_PARKING_SLOTS = parseInt(input.split(" ")[1]) || 0;
         if (this.MAX_PARKING_SLOTS <= 0) {
             // minimum: 1 slot
             throw new Error(
@@ -51,7 +51,7 @@ class ParkingLot {
                 throw new Error("Sorry, parking lot is full");
             }
         } else {
-            throw new Error("Sorry, no slot available");
+            throw new Error("Please create parking lot first");
         }
     }
 
@@ -63,20 +63,34 @@ class ParkingLot {
      */
     leaveCar(input) {
         if (this.MAX_PARKING_SLOTS > 0) {
-            let carNumber = input.split(" ")[1];
-            let isCarParked = this.parkingSlots.includes(carNumber);
-            if(isCarParked) {
-                for (let i = 0; i < this.MAX_PARKING_SLOTS; i++) {
-                    if (this.parkingSlots[i] === carNumber) {
-                        this.parkingSlots[i] = null;
-                        return i + 1;
+            const carNumber = input.split(" ")[1];
+            const parkingDuration = input.split(" ")[2];
+            if (carNumber && parkingDuration) {
+                const isCarParked = this.parkingSlots.includes(carNumber);
+                let charge = this.getCharge(parkingDuration);
+                if (isCarParked) {
+                    for (let i = 0; i < this.MAX_PARKING_SLOTS; i++) {
+                        if (this.parkingSlots[i] === carNumber) {
+                            this.parkingSlots[i] = null;
+                            return {
+                                carNumber: carNumber, 
+                                slot: i + 1, 
+                                charge: charge
+                            };
+                        }
                     }
+                } else {
+                    throw new Error(
+                        `Registration number ${carNumber} not found`
+                    );
                 }
             } else {
-                throw new Error(`Registration number ${carNumber} not found`);
+                throw new Error(
+                    "Please provide both registration number and parking duration (hour)"
+                );
             }
         } else {
-            throw new Error("Sorry, no slot available");
+            throw new Error("Please create parking lot first");
         }
     }
 
@@ -96,7 +110,7 @@ class ParkingLot {
             }
             return arr;
         } else {
-            throw new Error("Sorry, parking lot is empty");
+            throw new Error("Please create parking lot first");
         }
     }
 
@@ -112,6 +126,19 @@ class ParkingLot {
             }
         }
         return ele;
+    }
+
+    /**
+     * @description returns the parking charge
+     * used by leaveCar() method to find get parking charge
+     */
+    getCharge(hour) {
+        let charge = 10;
+        let extHour = hour - 2;
+        if (extHour > 0) {
+            charge += extHour * 10;
+        }
+        return charge;
     }
 }
 
