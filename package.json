@@ -5,20 +5,15 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "mocha tests/specs.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://ardeman@github.com/ardeman/exercise-parking-lot.git"
+    "test": "mocha tests/specs.js",
+    "build": "node scripts/build.js"
   },
   "author": "Ardeman (ardeman.com)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ardeman/exercise-parking-lot/issues"
-  },
-  "homepage": "https://github.com/ardeman/exercise-parking-lot#readme",
   "dependencies": {
     "chai": "^4.2.0",
-    "mocha": "^8.2.1"
+    "mocha": "^8.2.1",
+    "pkg": "^4.4.9",
+    "shelljs": "^0.8.4"
   }
 }

@@ -62,6 +62,7 @@ function processUserCommands(input) {
     const userCommand = input.split(" ")[0];
     let totalParkingSlots;
     let parkingSlotNumber;
+    let parkingResult;
     switch (userCommand) {
         case "create_parking_lot":
             try {

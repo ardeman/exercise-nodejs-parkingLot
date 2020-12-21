@@ -4,6 +4,7 @@
 # * Install dependencies
 npm install
 # * Build/Compile
+npm run build
 # * Run Test Suit to validate
 npm run test
 
