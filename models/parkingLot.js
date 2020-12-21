@@ -37,18 +37,22 @@ class ParkingLot {
     parkCar(input) {
         const len = this.parkingSlots.length;
         if (this.capacity > 0) {
-            let carNumber;
-            if (this.findNearestAvailableSlot(this.parkingSlots) == true) {
-                for (let i = 0; i < len; i++) {
-                    if (this.parkingSlots[i] == null) {
-                        carNumber = input.split(" ")[1];
-                        this.parkingSlots[i] = carNumber;
-                        i = i + 1;
-                        return i;
-                    }
-                }
+            const carNumber = input.split(" ")[1];
+            const isCarParked = this.parkingSlots.includes(carNumber);
+            if (isCarParked) {
+                throw new Error(`Registration number ${carNumber} is already parked`);
             } else {
-                throw new Error("Sorry, parking lot is full");
+                if (this.findNearestAvailableSlot(this.parkingSlots) == true) {
+                    for (let i = 0; i < len; i++) {
+                        if (this.parkingSlots[i] == null) {
+                            this.parkingSlots[i] = carNumber;
+                            i = i + 1;
+                            return i;
+                        }
+                    }
+                } else {
+                    throw new Error("Sorry, parking lot is full");
+                }
             }
         } else {
             throw new Error("Please create parking lot first");
