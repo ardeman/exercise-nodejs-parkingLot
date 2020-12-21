@@ -64,11 +64,16 @@ class ParkingLot {
     leaveCar(input) {
         if (this.MAX_PARKING_SLOTS > 0) {
             let carNumber = input.split(" ")[1];
-            for (let i = 0; i < this.MAX_PARKING_SLOTS; i++) {
-                if (this.parkingSlots[i] === carNumber) {
-                    this.parkingSlots[i] = null;
-                    return i + 1;
+            let isCarParked = this.parkingSlots.includes(carNumber);
+            if(isCarParked) {
+                for (let i = 0; i < this.MAX_PARKING_SLOTS; i++) {
+                    if (this.parkingSlots[i] === carNumber) {
+                        this.parkingSlots[i] = null;
+                        return i + 1;
+                    }
                 }
+            } else {
+                throw new Error(`Registration number ${carNumber} not found`);
             }
         } else {
             throw new Error("Sorry, no slot available");
